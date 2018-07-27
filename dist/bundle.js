@@ -106,7 +106,7 @@ eval("\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _commander = __webpack_require__(/*! commander */ \"./node_modules/commander/index.js\");\n\nvar _commander2 = _interopRequireDefault(_commander);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_commander2.default.command('hello').option('-r, --recursive', 'Remove recursively').action(function (cmd) {\n  console.log('hello world');\n  console.log(cmd);\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nvar _commander = __webpack_require__(/*! commander */ \"./node_modules/commander/index.js\");\n\nvar _commander2 = _interopRequireDefault(_commander);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_commander2.default.command('hello').option('-r, --recursive', 'Remove recursively').action(function (cmd) {\n  console.log('hello world');\n  console.log(cmd);\n});\n\n_commander2.default.parse(process.argv);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 

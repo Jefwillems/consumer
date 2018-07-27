@@ -7,3 +7,5 @@ program
     console.log('hello world');
     console.log(cmd);
   });
+
+program.parse(process.argv);
