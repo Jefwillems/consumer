@@ -6,8 +6,11 @@
   "author": "Jefwillems <jefwillems100@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "",
-    "prestart": ""
+    "start": "node ./dist/bundle.js",
+    "prestart": "webpack --mode=production",
+    "test": "node ./dist/bundle.js",
+    "pretest": "webpack --mode=development",
+    "build": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,14 @@
     }
   ],
   "devDependencies": {
-    "eslint": "^5.2.0"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.2.0",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "commander": "^2.16.0"
   }
 }

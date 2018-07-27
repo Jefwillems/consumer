@@ -12,6 +12,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-console": ["off"],
-    "comma-dangle": ["warn", "always"]
+    "comma-dangle": ["warn", "always"],
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }]
   }
 }
