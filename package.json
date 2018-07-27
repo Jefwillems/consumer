@@ -1,0 +1,33 @@
+{
+  "name": "consumer",
+  "version": "1.0.0",
+  "description": "Package that generates REST-api consumers for different front-end frameworks, from Swagger documentation",
+  "main": "index.js",
+  "author": "Jefwillems <jefwillems100@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "",
+    "prestart": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Jefwillems/consumer.git"
+  },
+  "homepage": "https://github.com/Jefwillems/consumer",
+  "bugs": {
+    "url": "https://github.com/Jefwillems/consumer/issues",
+    "email": "willems.jef@outlook.com"
+  },
+  "maintainers": [
+    {
+      "email": "willems.jef@outlook.com",
+      "name": "Jef Willems",
+      "url": "https://github.com/Jefwillems"
+    }
+  ],
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
+  }
+}

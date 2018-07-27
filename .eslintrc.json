@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": false,
+    "es6": true,
+    "amd": true,
+    "node": true
+  },
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 2015,
+    "ecmaFeatures": {
+      "spread": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {}
+}
