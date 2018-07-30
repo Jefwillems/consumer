@@ -9,7 +9,7 @@
     "start": "node ./dist/bundle.js",
     "prestart": "webpack --mode=production",
     "test": "node ./dist/consumer",
-    "pretest": "webpack --mode=development",
+    "dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
   },
   "repository": {
@@ -28,6 +28,9 @@
       "url": "https://github.com/Jefwillems"
     }
   ],
+  "bin": {
+    "consumer": "node ./dist/consumer.js"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -37,6 +40,8 @@
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
     "commander": "^2.16.0",
     "inquirer": "^6.0.0"
   }
