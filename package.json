@@ -43,6 +43,7 @@
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
     "commander": "^2.16.0",
-    "inquirer": "^6.0.0"
+    "inquirer": "^6.0.0",
+    "mustache": "^2.3.0"
   }
 }
