@@ -1,5 +1,21 @@
 import program from 'commander';
-import inquirer from 'inquirer';
+import { Ask, } from './question';
+import chalk from 'chalk';
+const clear = require('clear');
+clear();
+
+console.log(
+  chalk.blue(
+    `%c ________________________________________
+  < mooooooooooooooooooooooooooooooooooooo >
+   ----------------------------------------
+          \\   ^__^
+           \\  (oo)\\_______
+              (__)\\       )\\/\\
+                  ||----w |
+                  ||     ||`
+  )
+);
 
 program
   .command('create')
@@ -12,25 +28,16 @@ program
   )
   .option(
     '-t, --type [vue|angular]',
-    'optional. framework the consumer will be generated for. Will ask if not specified'
+    'optional. framework the consumer will be generated for. Will ask if not specified.'
   )
   .action(function(cmd) {
-    console.log('file:\t', cmd.file);
-    console.log('type:\t', cmd.type);
+    const ask = new Ask();
     if (!cmd.type) {
-      inquirer.prompt([
-        {
-          type: 'list',
-          name: 'framework',
-          message:
-            'What framework do you want the consumer to be generated for?',
-          choices: ['vue', 'angular',],
-          when: function(answers) {
-            return answers.comments !== 'Nope, all good!';
-          },
-        },
-      ]);
+      ask.addFrameworkQuestion();
     }
+    ask.exec().then(answers => {
+      console.log(answers);
+    });
   });
 
 program.parse(process.argv);
