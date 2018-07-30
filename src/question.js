@@ -5,12 +5,20 @@ export class Ask {
     this.questions = [];
   }
 
+  addFileQuestion() {
+    this.questions.push({
+      type: 'input',
+      name: 'file',
+      message: '🗄\tplease enter the path to the swagger file.',
+    });
+  }
+
   addFrameworkQuestion() {
     this.questions.push({
       type: 'list',
       name: 'framework',
       message:
-        '🚀 What framework do you want the consumer to be generated for?',
+        '🚀\tWhat framework do you want the consumer to be generated for?',
       choices: ['vue', 'angular',],
     });
   }
