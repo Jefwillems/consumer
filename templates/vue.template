@@ -1,0 +1,26 @@
+import Vue from 'vue';
+import types from './types';
+
+const _fetch = (url, options) => {
+  return fetch(url, {
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
+    ...options,
+  }).then(data => data.json());
+};
+
+const baseUrl = '{{{baseUrl}}}'
+
+export default {
+  {{#paths}}
+  {{{operationId}}}() {
+    _fetch(baseUrl + `{{{url}}}`, {
+      method: "{{{method}}}"
+    })
+    .then(data=> {
+
+    })
+  },
+  {{/paths}}
+};
