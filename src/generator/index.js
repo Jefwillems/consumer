@@ -1,18 +1,20 @@
 import fs from 'fs';
+import path from 'path';
 import event, { types, } from '../events';
 import { Data, } from '../data';
 import mustache from 'mustache';
 import settings from '../../settings';
 
 class Generator {
-  constructor({ framework, file, }) {
+  addAndwers({ framework, file, }) {
     this.framework = framework;
     this.path = file;
+    return this;
   }
 
   _readFile(cb) {
     fs.readFile(this.path, 'utf8', (err, data) => {
-      if (err) throw new Error(err);
+      if (err) event.emit(types.ERROR, err);
       const swaggerData = JSON.parse(data);
       event.emit(types.DATA_LOADED, swaggerData);
       cb(swaggerData);
@@ -33,13 +35,22 @@ class Generator {
       this.framework
     }.template`;
     fs.readFile(templatePath, 'utf8', (err, template) => {
-      if (err) throw err;
-      event.emit(types.TEMPLATE_PARSED, { templatePath, template, });
+      if (err) event.emit(types.ERROR, err);
       const js = mustache.render(template, d);
-      console.log('\n\n\n', js);
+      this.finishedJS = js;
+      event.emit(types.TEMPLATE_RENDERED, js);
     });
   }
-
+  writeToFile() {
+    fs.writeFile(
+      path.dirname(this.path) + '/actions.js',
+      this.finishedJS,
+      'utf8',
+      err => {
+        if (err) event.emit(types.ERROR, err);
+      }
+    );
+  }
   get extension() {
     return this.framework === 'angular' ? 'ts' : 'js';
   }
