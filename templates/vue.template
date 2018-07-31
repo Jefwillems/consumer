@@ -14,13 +14,13 @@ const baseUrl = '{{{baseUrl}}}'
 
 export default {
   {{#paths}}
-  {{{operationId}}}() {
+  {{{operationId}}}({ commit, }{{{pathParams}}}) {
     _fetch(baseUrl + `{{{url}}}`, {
       method: "{{{method}}}"
     })
     .then(data=> {
-
-    })
+      commit('{{{operationId}}}', data);
+    });
   },
   {{/paths}}
 };

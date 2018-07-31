@@ -9,15 +9,21 @@ export const Data = {
     pathKeys.forEach(pathKey => {
       const path = paths[pathKey];
       const methodKeys = Object.keys(path);
+
+      const u = pathKey.indexOf('{');
+      if (u > -1) {
+        pathKey = pathKey.split('{').join('${');
+      }
       ret.push(
         ...methodKeys.map(key => {
           return {
             method: key.toUpperCase(),
-            url: parseUrl(pathKey),
+            url: pathKey,
             description: path[key].description,
             operationId: path[key].operationId,
             produces: path[key].produces,
             parameters: path[key].parameters,
+            pathParams: this._resolvePathParams(path[key].parameters),
             responsen: path[key].responses,
           };
         })
@@ -28,12 +34,11 @@ export const Data = {
   baseUrl() {
     return Data.data.host + Data.data.basePath;
   },
-};
-
-const parseUrl = url => {
-  const u = url.indexOf('{');
-  if (u > -1) {
-    url = url.split('{').join('${');
-  }
-  return url;
+  _resolvePathParams(params) {
+    const pathParams = params.filter(p => p.in === 'path').map(p => p.name);
+    if (pathParams.length === 0) {
+      return undefined;
+    }
+    return ', ' + pathParams.join(', ');
+  },
 };
