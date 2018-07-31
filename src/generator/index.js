@@ -1,6 +1,6 @@
 import fs from 'fs';
 import event, { types, } from '../events';
-import Data from '../data';
+import { Data, } from '../data';
 import mustache from 'mustache';
 import settings from '../../settings';
 
@@ -21,23 +21,22 @@ class Generator {
 
   generate() {
     this._readFile(data => {
-      const d = new Data(data);
-      this._parseTemplate(d);
+      Data.init(data);
+      this._parseTemplate(Data);
     });
   }
 
-  _parseTemplate(data) {
+  _parseTemplate(d) {
     // ? parse template and write to dir.
 
     const templatePath = `${settings.ROOT_PATH}/templates/${
       this.framework
-    }.template.${this.extension}`;
-    console.log('template path: ', templatePath);
+    }.template`;
     fs.readFile(templatePath, 'utf8', (err, template) => {
       if (err) throw err;
-      console.log('template parsed: ', template);
-      const js = mustache.render(template, data.view);
-      eval(js);
+      event.emit(types.TEMPLATE_PARSED, { templatePath, template, });
+      const js = mustache.render(template, d);
+      console.log('\n\n\n', js);
     });
   }
 
