@@ -29,7 +29,6 @@ program
   )
   .action(function(cmd) {
     const ask = new Ask();
-    console.log(cmd.file);
     if (!cmd.file) {
       ask.addFileQuestion();
     }
@@ -37,7 +36,12 @@ program
       ask.addFrameworkQuestion();
     }
     ask.exec().then(answers => {
-      const gen = new Generator(answers);
+      const a = {
+        file: cmd.file,
+        framework: cmd.type,
+        ...answers,
+      };
+      const gen = new Generator(a);
       gen.generate();
     });
   });

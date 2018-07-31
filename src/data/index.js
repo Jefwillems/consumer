@@ -9,4 +9,10 @@ export default class Data {
     this.paths = data.paths;
     this.definitions = data.definitions;
   }
+
+  get view() {
+    return {
+      test: 'Hello data world!',
+    };
+  }
 }
