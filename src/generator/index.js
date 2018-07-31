@@ -1,20 +1,31 @@
-import VueGenerator from './vue-generator';
-import AngularGenerator from './angular-generator';
-class Generator {
-  constructor() {}
+import fs from 'fs';
+import event, { types, } from '../events';
+import Data from '../data';
 
-  getGenerator(framework) {
-    if (!this.types.includes(framework)) {
-      throw new Error();
-    }
-    switch (framework) {
-    case 'vue':
-      return new VueGenerator();
-    case 'angular':
-      return new AngularGenerator();
-    default:
-      throw new Error('Type is not valid');
-    }
+class Generator {
+  constructor({ framework, file, }) {
+    this.framework = framework;
+    this.path = file;
+  }
+
+  _readFile(cb) {
+    fs.readFile(this.path, (err, data) => {
+      if (err) throw new Error(err);
+      const swaggerData = JSON.parse(data);
+      event.emit(types.DATA_LOADED, swaggerData);
+      cb(swaggerData);
+    });
+  }
+
+  generate() {
+    this._readFile(data => {
+      const d = new Data(data);
+      this._parseTemplate(d);
+    });
+  }
+
+  _parseTemplate() {
+    // ? parse template and write to dir.
   }
 }
-export default new Generator();
+export default Generator;

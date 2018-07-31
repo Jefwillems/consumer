@@ -1,6 +1,6 @@
 import program from 'commander';
 import { Ask, } from './question';
-import generator from './generator';
+import Generator from './generator';
 import chalk from 'chalk';
 const clear = require('clear');
 
@@ -37,7 +37,8 @@ program
       ask.addFrameworkQuestion();
     }
     ask.exec().then(answers => {
-      generator.getGenerator(answers.framework).generate(answers.file);
+      const gen = new Generator(answers);
+      gen.generate();
     });
   });
 
