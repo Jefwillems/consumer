@@ -2,9 +2,9 @@ import program from 'commander';
 import { Ask, } from './question';
 import Generator from './generator';
 import chalk from 'chalk';
-const clear = require('clear');
+//const clear = require('clear');
 
-clear();
+//clear();
 console.log(
   chalk.blue(
     `%c ________________________________________
@@ -35,15 +35,22 @@ program
     if (!cmd.type) {
       ask.addFrameworkQuestion();
     }
-    ask.exec().then(answers => {
-      const a = {
-        file: cmd.file,
-        framework: cmd.type,
-        ...answers,
-      };
-      const gen = new Generator(a);
-      gen.generate();
+    if (ask.questions.length !== 0) {
+      return ask.exec().then(answers => {
+        const a = {
+          file: cmd.file,
+          framework: cmd.type,
+          ...answers,
+        };
+        const gen = new Generator(a);
+        gen.generate();
+      });
+    }
+    const gen = new Generator({
+      file: cmd.file,
+      framework: cmd.type,
     });
+    gen.generate();
   });
 
 program.parse(process.argv);
