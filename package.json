@@ -9,7 +9,7 @@
     "start": "node ./dist/bundle.js",
     "prestart": "webpack --mode=production",
     "test": "node ./dist/consumer",
-    "dev": "webpack --mode=development --watch",
+    "pretest": "webpack --mode=development && chmod +x ./dist/consumer.js",
     "build": "webpack --mode=production"
   },
   "repository": {
@@ -29,7 +29,7 @@
     }
   ],
   "bin": {
-    "consumer": "node ./dist/consumer.js"
+    "consumer": "./dist/consumer.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
